@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Boss from "../assets/boss-hog.png";
 import BabyHog from "./BabyHog";
-// import offspring from "../data.js"
+import offspring from "../data.js"
+
+// Use map instead to render dynamically
 
 function HogBoss() {
   const [eyeColor, setEyeColor] = useState("blue");
@@ -9,6 +11,15 @@ function HogBoss() {
   function handleChangeEyeColor(e) {
     setEyeColor(e.target.value);
   }
+  
+  const babyArray = offspring.map(piglet => (
+    <BabyHog 
+      key={piglet.id}
+      name={piglet.name}
+      hobby={piglet.hobby}
+      eyeColor={eyeColor} 
+    />
+  ))
 
   return (
     <div>
@@ -40,9 +51,7 @@ function HogBoss() {
         <img id="boss-blaster" src={Boss} alt="" />
       </div>
       <ul className="hoglist">
-        <BabyHog />
-        <BabyHog />
-        <BabyHog />
+        {babyArray}
       </ul>
     </div>
   );
